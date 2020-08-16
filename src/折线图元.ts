@@ -9,6 +9,9 @@ import Point from "./Point";
  */
 
 export default class 折线图元 implements 图元 {
+    设置颜色(color: string) {
+        this.color = color
+    }
     constructor() {
         this.显示数字 = true
         this.m_data = []
