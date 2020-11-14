@@ -33,6 +33,13 @@ function load() {
     图层A.添加图元(图元)
     ec.添加图层(图层A)
     ec.渲染()
+
+    setTimeout(
+        function () {
+            ec.设置比例(0.5)
+            ec.渲染()
+            console.log("设置成功")
+        }, 4000)
 }
 
 //@ts-ignore

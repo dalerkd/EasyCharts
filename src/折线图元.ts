@@ -1,3 +1,4 @@
+import { DrawIF } from './EasyCharts';
 
 import 元素 from "./元素";
 import 图元 from "./图元"
@@ -17,10 +18,10 @@ export default class 折线图元 implements 图元 {
         this.m_data = []
         this.color = "#ddd"
     }
-    渲染() {
+    渲染(draw: DrawIF) {
         for (let data of this.m_data) {
             data.设置颜色(this.color)
-            data.渲染()
+            data.渲染(draw)
         }
     }
     设置数据(data: Array<Point>) {

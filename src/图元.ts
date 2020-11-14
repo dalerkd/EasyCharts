@@ -1,3 +1,4 @@
+import { DrawIF } from './EasyCharts';
 import 元素 from "./元素";
 
 /**
@@ -8,6 +9,6 @@ import 元素 from "./元素";
  * 渲染方式
  */
 export default interface 图元 {
-    渲染(): void;
+    渲染(draw: DrawIF): void;
     设置数据(arg0: any): void;
 }
