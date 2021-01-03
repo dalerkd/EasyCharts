@@ -21,14 +21,15 @@ export default class 坐标系图元 implements 图元 {
         this.color = "#a98"
         this.maxPoint = new Point(10, 10)
         this.minPoint = new Point(0, 0)
+        this.设置数据(this.maxPoint, this.minPoint)
     }
     渲染(draw: DrawIF) {
         for (let data of this.m_data) {
             data.设置颜色(this.color)
+            console.log("开始渲染 坐标系 图元:", data)
             data.渲染(this.m_draw)
         }
     }
-    // TODO: 未注册 如何注册?
     极值回调(maxPoint: Point, minPoint: Point, draw: DrawIF) {
         //设置为新的坐标值
         this.设置数据(maxPoint, minPoint)
@@ -41,14 +42,14 @@ export default class 坐标系图元 implements 图元 {
          * 通过 max min 数据 计算出 m_data中需要 一个坐标系 边框 图形坐标
          */
         this.m_data = []
-        this.m_data.push(new 直线元素(new Point(0, 0), new Point(maxPoint.x + 5, 0)))
-        this.m_data.push(new 直线元素(new Point(0, 0), new Point(0, maxPoint.y + 5)))
+        this.m_data.push(new 直线元素(new Point(0, 0), new Point(maxPoint.x + 10, 0), false))
+        this.m_data.push(new 直线元素(new Point(0, 0), new Point(0, maxPoint.y + 10), false))
 
     }
     初始化基础功能(draw: DrawIF) {
         this.m_draw = draw
         //@ts-ignore
-        this.m_draw.RegisterExtreme(this.极值回调)
+        this.m_draw.RegisterExtreme(this.极值回调.bind(this))
     }
     private m_draw !: DrawIF
     private maxPoint: Point

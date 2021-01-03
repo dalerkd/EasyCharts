@@ -49,6 +49,7 @@ class DrawBase implements DrawIF {
         //@ts-ignore
         let context = canvas.getContext("2d")//得到绘图的上下文环境
 
+        //转换为设置像素坐标
         const head = this.坐标转换(p1)
         const end = this.坐标转换(p2)
 
@@ -64,16 +65,16 @@ class DrawBase implements DrawIF {
         if (notifyCallback) {
             let pointMax = new Point(0, 0);
             let pointMin = new Point(0, 0);
-            if (head.x >= end.x) {
-                pointMax.x = head.x
-                pointMax.y = head.y
-                pointMin.x = end.x
-                pointMin.y = end.y
+            if (p1.x >= p2.x) {
+                pointMax.x = p1.x
+                pointMax.y = p1.y
+                pointMin.x = p2.x
+                pointMin.y = p2.y
             } else {
-                pointMax.x = end.x
-                pointMax.y = end.y
-                pointMin.x = head.x
-                pointMin.y = head.y
+                pointMax.x = p2.x
+                pointMax.y = p2.y
+                pointMin.x = p1.x
+                pointMin.y = p1.y
             }
             this.极限值管理(pointMax, pointMin)
         }
@@ -125,8 +126,8 @@ class DrawBase implements DrawIF {
         //@ts-ignore
         let w = canvas.width
 
-        let realX = point.x * 50 * this.m_比例 + 40
-        let realY = h - point.y * 8 * this.m_比例 - 40
+        let realX = point.x * 10 * this.m_比例 + 40
+        let realY = h - point.y * 10 * this.m_比例 - 40
         return new POINT(realX, realY)
     }
     public 设置比例(比例: number) {
@@ -139,7 +140,7 @@ class DrawBase implements DrawIF {
 export default class EasyCharts {
     constructor(htmlElementName?: string) {
         this.m_data = []
-        this.m_draw = new DrawBase(this.getRePaint)
+        this.m_draw = new DrawBase(this.RePaint.bind(this))
         this.m_rePaint = true
         if (htmlElementName)
             this.绑定(htmlElementName)
@@ -160,6 +161,9 @@ export default class EasyCharts {
     }
     getRePaint(): boolean {
         return this.m_rePaint
+    }
+    RePaint() {
+        this.setRePaint(true)
     }
     渲染() {
         while (this.getRePaint()) {
