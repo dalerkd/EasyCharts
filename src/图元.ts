@@ -10,5 +10,6 @@ import 元素 from "./元素";
  */
 export default interface 图元 {
     渲染(draw: DrawIF): void;
-    设置数据(arg0: any): void;
+    设置数据(...args: any): void;
+    初始化基础功能(draw: DrawIF): void;
 }

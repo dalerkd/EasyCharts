@@ -5,8 +5,10 @@ import Point from "./Point"
 
 
 function load() {
+    console.log('Start')
+    debugger
     let ec = new EasyCharts()
-    ec.绑定('#abc')
+    ec.绑定('#canvas')
     let 图层A = new 图层()
     let 图元 = new 折线图元()
 

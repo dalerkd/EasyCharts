@@ -12,6 +12,8 @@ import Point from "./Point";
 export default class 折线图元 implements 图元 {
     设置颜色(color: string) {
         this.color = color
+        //@ts-ignore
+        this.m_draw = null
     }
     constructor() {
         this.显示数字 = true
@@ -21,7 +23,7 @@ export default class 折线图元 implements 图元 {
     渲染(draw: DrawIF) {
         for (let data of this.m_data) {
             data.设置颜色(this.color)
-            data.渲染(draw)
+            data.渲染(this.m_draw)
         }
     }
     设置数据(data: Array<Point>) {
@@ -34,6 +36,10 @@ export default class 折线图元 implements 图元 {
             prePoint = pt
         }
     }
+    初始化基础功能(draw: DrawIF) {
+        this.m_draw = draw
+    }
+    private m_draw!: DrawIF;
     private 显示数字: boolean
     private m_data: Array<元素>
     private color: string

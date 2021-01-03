@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && node ./build/main.js",
+    "dev": "tsc && parcel ./setup/index.html",
     "build": "tsc && parcel ./setup/index.html"
   },
   "author": "",
